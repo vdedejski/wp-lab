@@ -16,7 +16,6 @@ import java.io.IOException;
 public class BalloonOrderServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
-    private final BalloonService balloonService;
     private final OrderService orderService;
 
 
@@ -24,7 +23,6 @@ public class BalloonOrderServlet extends HttpServlet {
                                BalloonService balloonService,
                                OrderService orderService) {
         this.springTemplateEngine = springTemplateEngine;
-        this.balloonService = balloonService;
         this.orderService = orderService;
     }
 

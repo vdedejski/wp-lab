@@ -5,8 +5,6 @@ import lombok.Data;
 @Data
 public class Order {
 
-    // Lombok mi dava getteri i setteri
-
     private String balloonColor;
     private String balloonSize;
     private String clientName;
@@ -22,46 +20,6 @@ public class Order {
     }
 
     public Order() {
-    }
-
-    public String getBalloonColor() {
-        return balloonColor;
-    }
-
-    public void setBalloonColor(String balloonColor) {
-        this.balloonColor = balloonColor;
-    }
-
-    public String getBalloonSize() {
-        return balloonSize;
-    }
-
-    public void setBalloonSize(String balloonSize) {
-        this.balloonSize = balloonSize;
-    }
-
-    public String getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public String getClientAddress() {
-        return clientAddress;
-    }
-
-    public void setClientAddress(String clientAddress) {
-        this.clientAddress = clientAddress;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
     }
 
     public void setClientNameAndAddress(String clientName, String clientAddress) {

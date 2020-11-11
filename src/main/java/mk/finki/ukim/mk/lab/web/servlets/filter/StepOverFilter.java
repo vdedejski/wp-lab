@@ -25,8 +25,8 @@ public class StepOverFilter implements Filter {
 
         String path = request.getServletPath();
 
-        if(color == null && !"/general".equals(path) && !"/main.css".equals(path)){
-            response.sendRedirect("/general");
+        if(color == null && !"".equals(path) && !"/main.css".equals(path)){
+            response.sendRedirect("");
         }else {
             filterChain.doFilter(servletRequest, servletResponse);
         }

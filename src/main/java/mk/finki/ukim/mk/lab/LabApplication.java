@@ -9,7 +9,6 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 public class LabApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(LabApplication.class, args);
     }
 

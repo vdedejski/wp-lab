@@ -15,7 +15,7 @@
 </header>
 <main>
     <h2>Choose balloon color:</h2>
-    <form th:method="POST" th:action="@{/general}">
+    <form th:method="POST" th:action="@{/}">
         <ul>
             <li th:each="balloon : ${Balloons}">
                 <input type="radio" name="color" th:value="${balloon.name}" />
