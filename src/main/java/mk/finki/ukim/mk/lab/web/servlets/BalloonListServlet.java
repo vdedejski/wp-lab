@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "balloon-list-servlet", urlPatterns = "")
+@WebServlet(name = "balloon-list-servlet", urlPatterns = "/servlet")
 public class BalloonListServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;

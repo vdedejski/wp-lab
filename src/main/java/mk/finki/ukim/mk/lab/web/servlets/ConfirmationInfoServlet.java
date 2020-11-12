@@ -17,14 +17,11 @@ import java.io.IOException;
 public class ConfirmationInfoServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
-    private final BalloonService balloonService;
     private final OrderService orderService;
 
     public ConfirmationInfoServlet(SpringTemplateEngine springTemplateEngine,
-                                   BalloonService balloonService,
                                    OrderService orderService) {
         this.springTemplateEngine = springTemplateEngine;
-        this.balloonService = balloonService;
         this.orderService = orderService;
     }
 
@@ -38,16 +35,17 @@ public class ConfirmationInfoServlet extends HttpServlet {
         context.setVariable("clientBrowser", req.getHeader("user-agent"));
         context.setVariable("balloonColor", orderService.getCurrentOrderStatus().getBalloonColor());
         context.setVariable("balloonSize", orderService.getCurrentOrderStatus().getBalloonSize());
+        context.setVariable("balloonId", orderService.getCurrentOrderStatus().getBalloonId());
+
+        DataHolder.orderList.add(orderService.getCurrentOrderStatus());
 
         this.springTemplateEngine.process("confirmationInfo.html", context, resp.getWriter());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DataHolder.orderList.add(orderService.getCurrentOrderStatus());
-
         req.getSession().invalidate();
         orderService.getCurrentOrderStatus().dumpData();
-        resp.sendRedirect("/general");
+        resp.sendRedirect("/balloons");
     }
 }

@@ -51,13 +51,19 @@
             <td><b>Balloon Size </b></td>
             <td th:text="${balloonSize}"></td>
         </tr>
+        <tr>
+            <td><b>Balloon Id </b></td>
+            <td th:text="${balloonId}"></td>
+        </tr>
     </table>
     <div>
         <form method="POST" th:action="@{/ConfirmationInfo}">
-            <button type="submit" name="submit" value="Log out" class="link-button">Log out</button>
-            <button type="submit" name="submit" value="Log out" class="link-button">New order</button>
-
+            <button type="submit" name="submit" value="New Order" class="link-button">New order</button>
         </form>
+        <form method="GET" th:action="@{/userOrders}">
+            <button type="submit" name="submit" value="All orders" class="link-button">See all orders</button>
+        </form>
+
     </div>
 
 

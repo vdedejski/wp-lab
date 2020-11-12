@@ -1,4 +1,4 @@
-package mk.finki.ukim.mk.lab.web.servlets.filter;
+package mk.finki.ukim.mk.lab.web.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -24,10 +24,13 @@ public class StepOverFilter implements Filter {
         String color = (String) request.getSession().getAttribute("color");
 
         String path = request.getServletPath();
+        System.out.println(path);
 
-        if(color == null && !"".equals(path) && !"/main.css".equals(path)){
-            response.sendRedirect("");
-        }else {
+        if (color == null && !"/balloons".equals(path) && !"/main.css".equals(path)
+                && !"/form".equals(path)  && !"/balloons/add".equals(path)
+                && !path.contains("/balloons/delete/") && !path.contains("/balloons/edit-balloon/")) {
+            response.sendRedirect("/balloons");
+        } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }

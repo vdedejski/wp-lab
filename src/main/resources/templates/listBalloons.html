@@ -1,30 +1,125 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>Balloon Order page - Welcome and choose a Balloon</title>
-    <style type="text/css">
-        body {
-            width: 800px;
-            margin: auto;
-        }
-    </style>
+    <meta charset="UTF-8"/>
+    <title>List all Balloons</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
-    <h1>Welcome to our Balloon Shop App</h1>
-</header>
-<main>
-    <h2>Choose balloon color:</h2>
-    <form th:method="POST" th:action="@{/}">
-        <ul>
-            <li th:each="balloon : ${Balloons}">
-                <input type="radio" name="color" th:value="${balloon.name}" />
-                <label th:text="${balloon.name + ' Balloon'}"></label>
-            </li>
-        </ul>
-        <input type="submit" value="Submit">
-    </form>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/balloons">THE BALLOON SHOP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-</main>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link active" href="/balloons">Home</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                           placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">THE BALLOON SHOP</h1>
+    </div>
+</section>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <form th:action="@{/form}" th:method="GET">
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-trash">Add</i>
+                    </button>
+                </form>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Manufacturer</th>
+                        <th scope="col">ID</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="balloon : ${listBalloons}">
+                        <td th:text="${balloon.getName()}"></td>
+                        <td th:text="${balloon.getDescription()}"></td>
+                        <td th:text="${balloon.getManufacturer() != null}
+                            ? ${balloon.getManufacturer().getName()} : 'No Manufacturer'"></td>
+                        <td th:text="${balloon.getId()}"></td>
+                        <td>
+                            <form th:method="POST" th:action="@{/balloons}">
+                                <button name="balloon" th:value="${balloon.getId()}" type="submit"
+                                        class="btn btn-success">Order
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">
+                                <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i>
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:action="@{'/balloons/edit-balloon/{id}' (id=${balloon.getId()})}" th:method="GET">
+                                <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-trash">Edit</i>
+                                </button>
+                            </form>
+                        </td>
+                        <!--                        <td class="text-right">-->
+                        <!--                            <form th:action="@{'/products/delete/{id}' (id=${product.getId()})}" th:method="DELETE">-->
+                        <!--                                <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>-->
+                        <!--                            </form>-->
+                        <!--                            <a th:href="@{'/products/edit-form/{id}' (id=${product.getId()})}" class="btn btn-sm btn-info"><i class="fa fa-trash">Edit</i></a>-->
+                        <!--                        </td>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col mb-3">
+            <div class="row">
+                <!--                <div class="col-sm-12 col-md-12">-->
+                <!--                    <a href="/products/add-form" class="btn btn-block btn-dark">Add new product</a>-->
+                <!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+
+
+

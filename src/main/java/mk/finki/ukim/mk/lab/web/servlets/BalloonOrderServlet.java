@@ -32,6 +32,7 @@ public class BalloonOrderServlet extends HttpServlet {
 
         req.getSession().setAttribute("size", orderService.getCurrentOrderStatus().getBalloonSize());
 
+        context.setVariable("balloonId", orderService.getCurrentOrderStatus().getBalloonId());
         context.setVariable("balloonSize", orderService.getCurrentOrderStatus().getBalloonSize());
         this.springTemplateEngine.process("deliveryInfo.html", context, resp.getWriter());
     }

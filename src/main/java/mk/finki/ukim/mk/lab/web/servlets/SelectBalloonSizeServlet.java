@@ -16,7 +16,6 @@ import java.io.IOException;
 public class SelectBalloonSizeServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
-    private final BalloonService balloonService;
     private final OrderService orderService;
 
 
@@ -24,7 +23,6 @@ public class SelectBalloonSizeServlet extends HttpServlet {
                                     BalloonService balloonService,
                                     OrderService orderService) {
         this.springTemplateEngine = springTemplateEngine;
-        this.balloonService = balloonService;
         this.orderService = orderService;
 
     }
@@ -34,6 +32,8 @@ public class SelectBalloonSizeServlet extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         context.setVariable("balloonColor", orderService.getCurrentOrderStatus().getBalloonColor());
+        context.setVariable("balloonId", orderService.getCurrentOrderStatus().getBalloonId());
+
         this.springTemplateEngine.process("selectBalloonSize.html", context, resp.getWriter());
 
     }
