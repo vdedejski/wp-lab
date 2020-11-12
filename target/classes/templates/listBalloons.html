@@ -31,23 +31,23 @@
                 </li>
             </ul>
 
-            <form class="form-inline my-2 my-lg-0">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                           placeholder="Search...">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-secondary btn-number">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
+<!--            <form class="form-inline my-2 my-lg-0">-->
+<!--                <div class="input-group input-group-sm">-->
+<!--                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"-->
+<!--                           placeholder="Search...">-->
+<!--                    <div class="input-group-append">-->
+<!--                        <button type="button" class="btn btn-secondary btn-number">-->
+<!--                            <i class="fa fa-search"></i>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </form>-->
         </div>
     </div>
 </nav>
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">THE BALLOON SHOP</h1>
+        <h1 class="jumbotron-heading">AVAILABLE BALOONS</h1>
     </div>
 </section>
 
@@ -56,9 +56,12 @@
         <div class="col-12">
             <div class="table-responsive">
                 <form th:action="@{/form}" th:method="GET">
-                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-trash">Add</i>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="fa fa-trash">Add a
+                        balloon</i>
                     </button>
                 </form>
+
+                <br/>
 
                 <table class="table table-striped">
                     <thead>
@@ -82,38 +85,25 @@
                         <td>
                             <form th:method="POST" th:action="@{/balloons}">
                                 <button name="balloon" th:value="${balloon.getId()}" type="submit"
-                                        class="btn btn-success">Order
+                                        class="btn btn-success btn-sm">Order
                                 </button>
                             </form>
                         </td>
                         <td>
                             <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">
-                                <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i>
+                                <button type="submit" class="btn btn-sm btn-danger btn-sm"><i class="fa fa-trash">Delete</i>
                                 </button>
                             </form>
                         </td>
                         <td>
                             <form th:action="@{'/balloons/edit-balloon/{id}' (id=${balloon.getId()})}" th:method="GET">
-                                <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-trash">Edit</i>
+                                <button type="submit" class="btn btn-sm btn-info btn-sm"><i class="fa fa-trash">Edit</i>
                                 </button>
                             </form>
                         </td>
-                        <!--                        <td class="text-right">-->
-                        <!--                            <form th:action="@{'/products/delete/{id}' (id=${product.getId()})}" th:method="DELETE">-->
-                        <!--                                <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>-->
-                        <!--                            </form>-->
-                        <!--                            <a th:href="@{'/products/edit-form/{id}' (id=${product.getId()})}" class="btn btn-sm btn-info"><i class="fa fa-trash">Edit</i></a>-->
-                        <!--                        </td>-->
                     </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-        <div class="col mb-3">
-            <div class="row">
-                <!--                <div class="col-sm-12 col-md-12">-->
-                <!--                    <a href="/products/add-form" class="btn btn-block btn-dark">Add new product</a>-->
-                <!--                </div>-->
             </div>
         </div>
     </div>
