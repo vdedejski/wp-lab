@@ -1,76 +1,116 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8"/>
     <title>Balloon Order page - Balloon Size</title>
-    <style type = "text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <style type="text/css">
         body {
-            width: 800px;
+            width: 100%;
             margin: auto;
         }
-        table {
-            width:100%;
+
+        .content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
         }
+
+        table {
+            width: 100%;
+        }
+
         table, td, th {
             border: 1px solid black;
-            padding:3px 2px;
+            padding: 3px 2px;
         }
+
         section {
             float: left;
-            margin: 0 1.5%;
+            margin-left: 600px;
             width: 63%;
         }
+
         aside {
             float: right;
-            margin: 0 1.5%;
+            margin-right: 200px;
             width: 30%;
         }
+
     </style>
 </head>
 <body>
-<header>
-    <h1>Balloon Order page - Select Balloon Size </h1>
-</header>
-<section>
-    <h2>Choose balloon size:</h2>
-    <form th:method="POST" th:action="@{/SelectBalloonSize}">
-        <ul>
-            <li>
-                <input type="radio" name="size" th:value="Small" />
-                <label th:text="Small"></label>
-            </li>
-            <li>
-                <input type="radio" name="size" th:value="Medium" />
-                <label th:text="Medium"></label>
-            </li>
-            <li>
-                <input type="radio" name="size" th:value="Big" />
-                <label th:text="Big"></label>
-            </li>
-            <li>
-                <input type="radio" name="size" th:value="ExtraBig" />
-                <label th:text="ExtraBig"></label>
-            </li>
-        </ul>
-        <input type="submit" value="Submit">
-    </form>
-</section>
-<aside>
-    <table>
-        <tr>
-            <th colspan="2">
-                Your Order Status
-            </th>
-        </tr>
-        <tr>
-            <td><b>Balloon Type </b></td>
-            <td th:text="${balloonColor}"></td>
-        </tr>
-        <tr>
-            <td><b>Balloon Id </b></td>
-            <td th:text="${balloonId}"></td>
-        </tr>
-    </table>
-</aside>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/balloons">THE BALLOON SHOP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+<div class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Balloon Order page - Select Balloon Size </h1>
+    </div>
+</div>
 
+<div class="content">
+    <section>
+        <h2>Choose balloon size:</h2>
+        <form th:method="POST" th:action="@{/SelectBalloonSize}">
+            <div class="form-check">
+                <ul>
+                    <li>
+                        <input class="form-check-input" type="radio" name="size" th:value="Small"/>
+                        <label th:text="Small"></label>
+                    </li>
+                    <li>
+                        <input class="form-check-input" type="radio" name="size" th:value="Medium"/>
+                        <label th:text="Medium"></label>
+                    </li>
+                    <li>
+                        <input class="form-check-input" type="radio" name="size" th:value="Big"/>
+                        <label th:text="Big"></label>
+                    </li>
+                    <li>
+                        <input class="form-check-input" type="radio" name="size" th:value="ExtraBig"/>
+                        <label th:text="ExtraBig"></label>
+                    </li>
+                </ul>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+        </form>
+    </section>
+
+    <aside>
+        <table>
+            <tr>
+                <th colspan="2">
+                    Your Order Status
+                </th>
+            </tr>
+            <tr>
+                <td><b>Balloon Type </b></td>
+                <td th:text="${balloonColor}"></td>
+            </tr>
+            <tr>
+                <td><b>Balloon Id </b></td>
+                <td th:text="${balloonId}"></td>
+            </tr>
+        </table>
+    </aside>
+</div>
 </body>
 </html>

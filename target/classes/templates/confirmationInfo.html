@@ -1,72 +1,94 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8"/>
     <title>WP lab - Confirmation Info</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
     <style type="text/css">
+
         body {
-            width: 800px;
+            width: 100%;
             margin: auto;
         }
-        table {
-            width:100%;
+
+        section {
+            margin: auto;
+            width: 70%;
+            padding: 10px;
         }
-        table, td, th {
-            border: 1px solid black;
-            padding: 3px 2px;
+
+        .buttons {
+            position: center;
         }
     </style>
 </head>
 <body>
-<section>
-    <header>
-        <h1>Balloon Order page - Order confirmation </h1>
-    </header>
-    <table>
-        <tr>
-            <th colspan="2">
-                Your Order Status
-            </th>
-        </tr>
-        <tr>
-            <td><b>Client Name </b></td>
-            <td th:text="${clientName}"></td>
-        </tr>
-        <tr>
-            <td><b>Client Address </b></td>
-            <td th:text="${clientAddress}"></td>
-        </tr>
-        <tr>
-            <td><b>Client IP Address</b></td>
-            <td th:text="${clientIP}"></td>
-        </tr>
-        <tr>
-            <td><b>Client Browser</b></td>
-            <td th:text="${clientBrowser}"></td>
-        </tr>
-        <tr>
-            <td><b>Balloon Color </b></td>
-            <td th:text="${balloonColor}"></td>
-        </tr>
-        <tr>
-            <td><b>Balloon Size </b></td>
-            <td th:text="${balloonSize}"></td>
-        </tr>
-        <tr>
-            <td><b>Balloon Id </b></td>
-            <td th:text="${balloonId}"></td>
-        </tr>
-    </table>
-    <div>
-        <form method="POST" th:action="@{/ConfirmationInfo}">
-            <button type="submit" name="submit" value="New Order" class="link-button">New order</button>
-        </form>
-        <form method="GET" th:action="@{/userOrders}">
-            <button type="submit" name="submit" value="All orders" class="link-button">See all orders</button>
-        </form>
 
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/balloons">THE BALLOON SHOP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </div>
+</nav>
+<div class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Balloon Order page - Order confirmation </h1>
+    </div>
+</div>
 
 
+<section>
+    <button type="button" class="btn btn-primary btn-lg btn-block" disabled>Your order status</button>
+
+    <br/>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Client Name</th>
+            <th scope="col">Client Address</th>
+            <th scope="col">Client IP Address</th>
+            <th scope="col">Client Browser</th>
+            <th scope="col">Balloon Color</th>
+            <th scope="col">Balloon Size</th>
+            <th scope="col">Balloon Id</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <td th:text="${clientName}"></td>
+        <td th:text="${clientAddress}"></td>
+        <td th:text="${clientIP}"></td>
+        <td th:text="${clientBrowser}"></td>
+        <td th:text="${balloonColor}"></td>
+        <td th:text="${balloonSize}"></td>
+        <td th:text="${balloonId}"></td>
+        </tbody>
+    </table>
+</section>
+<section>
+    <div class="buttons">
+        <form method="POST" th:action="@{/ConfirmationInfo}">
+            <button type="submit" name="submit" value="New Order" class="btn btn-success">New order</button>
+        </form>
+        <br/>
+        <form method="GET" th:action="@{/userOrders}">
+            <button type="submit" name="submit" value="All orders" class="btn btn-secondary">See all orders</button>
+        </form>
+    </div>
 </section>
 </body>
 </html>
