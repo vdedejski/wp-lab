@@ -30,24 +30,20 @@
                     <a class="nav-link active" href="/balloons">Home</a>
                 </li>
             </ul>
-
-<!--            <form class="form-inline my-2 my-lg-0">-->
-<!--                <div class="input-group input-group-sm">-->
-<!--                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"-->
-<!--                           placeholder="Search...">-->
-<!--                    <div class="input-group-append">-->
-<!--                        <button type="button" class="btn btn-secondary btn-number">-->
-<!--                            <i class="fa fa-search"></i>-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </form>-->
         </div>
     </div>
 </nav>
 <section class="jumbotron text-center">
     <div class="container">
         <h1 class="jumbotron-heading">AVAILABLE BALOONS</h1>
+        <div class="spinner-grow text-primary" role="status">
+        </div>
+        <div class="spinner-grow text-secondary" role="status">
+        </div>
+        <div class="spinner-grow text-success" role="status">
+        </div>
+        <div class="spinner-grow text-danger" role="status">
+        </div>
     </div>
 </section>
 
@@ -63,50 +59,63 @@
 
                 <br/>
 
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Manufacturer</th>
-                        <th scope="col">ID</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="balloon : ${listBalloons}">
-                        <td th:text="${balloon.getName()}"></td>
-                        <td th:text="${balloon.getDescription()}"></td>
-                        <td th:text="${balloon.getManufacturer() != null}
-                            ? ${balloon.getManufacturer().getName()} : 'No Manufacturer'"></td>
-                        <td th:text="${balloon.getId()}"></td>
-                        <td>
-                            <form th:method="POST" th:action="@{/balloons}">
-                                <button name="balloon" th:value="${balloon.getId()}" type="submit"
-                                        class="btn btn-success btn-sm">Order
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">
-                                <button type="submit" class="btn btn-sm btn-danger btn-sm"><i class="fa fa-trash">Delete</i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form th:action="@{'/balloons/edit-balloon/{id}' (id=${balloon.getId()})}" th:method="GET">
-                                <button type="submit" class="btn btn-sm btn-info btn-sm"><i class="fa fa-trash">Edit</i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <form th:action="@{/search}" th:method="GET" class="form-inline my-2 my-lg-0">
+                    <input type="text" class="form-control" aria-label="Small"
+                           aria-describedby="inputGroup-sizing-lg"
+                           id="name"
+                           name="name"
+                           placeholder="Search by name...">
+                </form>
+
+                <br/>
+
             </div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Manufacturer</th>
+                    <th scope="col">ID</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="balloon : ${listBalloons}">
+                    <td th:text="${balloon.getName()}"></td>
+                    <td th:text="${balloon.getDescription()}"></td>
+                    <td th:text="${balloon.getManufacturer() != null}
+                            ? ${balloon.getManufacturer().getName()} : 'No Manufacturer'"></td>
+                    <td th:text="${balloon.getId()}"></td>
+                    <td>
+                        <form th:method="POST" th:action="@{/balloons}">
+                            <button name="balloon" th:value="${balloon.getId()}" type="submit"
+                                    class="btn btn-success btn-sm">Order
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">
+                            <button type="submit" class="btn btn-sm btn-danger btn-sm"><i
+                                    class="fa fa-trash">Delete</i>
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{'/balloons/edit-balloon/{id}' (id=${balloon.getId()})}" th:method="GET">
+                            <button type="submit" class="btn btn-sm btn-info btn-sm"><i class="fa fa-trash">Edit</i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

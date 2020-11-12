@@ -88,4 +88,16 @@ public class BalloonController {
         }
         return "redirect:/products?error=BalloonNotFound";
     }
+
+    @GetMapping("/search")
+    public String getSearchBalloons(@RequestParam String name, Model model) {
+        System.out.println(name);
+        if(!name.isEmpty()){
+            model.addAttribute("listBalloons", balloonService.filterByName(name));
+            return "listBalloons";
+        }
+        model.addAttribute("listBalloons", balloonService.listAll());
+        return "redirect:/listBalloons";
+    }
+
 }

@@ -24,11 +24,11 @@ public class StepOverFilter implements Filter {
         String color = (String) request.getSession().getAttribute("color");
 
         String path = request.getServletPath();
-        System.out.println(path);
 
         if (color == null && !"/balloons".equals(path) && !"/main.css".equals(path)
-                && !"/form".equals(path)  && !"/balloons/add".equals(path)
-                && !path.contains("/balloons/delete/") && !path.contains("/balloons/edit-balloon/")) {
+                && !"/form".equals(path) && !"/balloons/add".equals(path)
+                && !path.contains("/balloons/delete/") && !path.contains("/balloons/edit-balloon/")
+                && !"/search".equals(path)) {
             response.sendRedirect("/balloons");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);

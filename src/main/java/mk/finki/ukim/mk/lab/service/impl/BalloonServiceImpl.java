@@ -56,4 +56,9 @@ public class BalloonServiceImpl implements BalloonService {
         balloonRepository.deleteById(id);
     }
 
+    @Override
+    public List<Balloon> filterByName(String name) {
+        return balloonRepository.findAllByName(name);
+    }
+
 }

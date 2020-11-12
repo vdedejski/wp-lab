@@ -12,5 +12,7 @@ public interface BalloonService {
     Optional<Balloon> findById(Long id);
     Optional<Balloon> save(String name, String description, Long balloonId, Long id);
     void deleteById(Long id);
+    List<Balloon> filterByName(String name);
+
 }
 
