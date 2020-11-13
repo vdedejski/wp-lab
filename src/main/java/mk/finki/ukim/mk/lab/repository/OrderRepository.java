@@ -19,4 +19,8 @@ public class OrderRepository {
     public Order getOrder() {
         return DataHolder.order;
     }
+
+    public void newOrder() {
+        DataHolder.order = new Order(Math.abs(UUID.randomUUID().getLeastSignificantBits()));
+    }
 }

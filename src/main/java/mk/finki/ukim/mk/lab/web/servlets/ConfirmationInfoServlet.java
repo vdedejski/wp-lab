@@ -54,6 +54,7 @@ public class ConfirmationInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().invalidate();
         orderService.getCurrentOrderStatus().dumpData();
+        orderService.newOrder();
         resp.sendRedirect("/balloons");
     }
 }

@@ -24,4 +24,9 @@ public class OrderServiceImpl implements OrderService {
     public Order getCurrentOrderStatus() {
         return orderRepository.getOrder();
     }
+
+    @Override
+    public void newOrder() {
+        orderRepository.newOrder();
+    }
 }

@@ -2,6 +2,8 @@ package mk.finki.ukim.mk.lab.model;
 
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class Order {
 
@@ -36,6 +38,10 @@ public class Order {
         this.balloonSize = null;
         this.orderId = null;
         this.balloonId = null;
+    }
+
+    public Order(Long id){
+        this.orderId = id;
     }
 
     public String getBalloonColor() {
