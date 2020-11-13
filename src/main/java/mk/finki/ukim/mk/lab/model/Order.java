@@ -37,4 +37,52 @@ public class Order {
         this.orderId = null;
         this.balloonId = null;
     }
+
+    public String getBalloonColor() {
+        return balloonColor;
+    }
+
+    public void setBalloonColor(String balloonColor) {
+        this.balloonColor = balloonColor;
+    }
+
+    public String getBalloonSize() {
+        return balloonSize;
+    }
+
+    public void setBalloonSize(String balloonSize) {
+        this.balloonSize = balloonSize;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getClientAddress() {
+        return clientAddress;
+    }
+
+    public void setClientAddress(String clientAddress) {
+        this.clientAddress = clientAddress;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public Long getBalloonId() {
+        return balloonId;
+    }
+
+    public void setBalloonId(Long balloonId) {
+        this.balloonId = balloonId;
+    }
 }

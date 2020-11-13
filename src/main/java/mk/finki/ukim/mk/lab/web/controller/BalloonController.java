@@ -97,7 +97,7 @@ public class BalloonController {
             return "listBalloons";
         }
         model.addAttribute("listBalloons", balloonService.listAll());
-        return "redirect:/listBalloons";
+        return "redirect:/balloons";
     }
 
 }
