@@ -66,7 +66,6 @@ public class BalloonController {
                               @RequestParam Long balloonId,
                               @RequestParam String description,
                               @RequestParam Long manufacturer){
-        System.out.println(balloonId);
         this.balloonService.save(name, description, balloonId, manufacturer);
         return "redirect:/balloons";
     }
@@ -91,7 +90,6 @@ public class BalloonController {
 
     @GetMapping("/search")
     public String getSearchBalloons(@RequestParam String name, Model model) {
-        System.out.println(name);
         if(!name.isEmpty()){
             model.addAttribute("listBalloons", balloonService.filterByName(name));
             return "listBalloons";
