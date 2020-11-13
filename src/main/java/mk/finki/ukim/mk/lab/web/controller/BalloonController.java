@@ -82,7 +82,6 @@ public class BalloonController {
             Balloon balloon = this.balloonService.findById(id).get();
             model.addAttribute("manufacturers", this.manufacturerService.findAll());
             model.addAttribute("balloons", this.balloonService.listAll());
-            model.addAttribute("balloon", balloon);
             return "add-balloon";
         }
         return "redirect:/products?error=BalloonNotFound";
@@ -92,6 +91,16 @@ public class BalloonController {
     public String getSearchBalloons(@RequestParam String name, Model model) {
         if(!name.isEmpty()){
             model.addAttribute("listBalloons", balloonService.filterByName(name));
+            return "listBalloons";
+        }
+        model.addAttribute("listBalloons", balloonService.listAll());
+        return "redirect:/balloons";
+    }
+
+    @GetMapping("/searchByType")
+    public String getByType(@RequestParam String type, Model model) {
+        if(!type.isEmpty()){
+            model.addAttribute("listBalloons", balloonService.filterByType(type));
             return "listBalloons";
         }
         model.addAttribute("listBalloons", balloonService.listAll());

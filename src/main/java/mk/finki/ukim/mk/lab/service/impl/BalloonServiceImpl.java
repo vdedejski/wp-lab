@@ -58,7 +58,13 @@ public class BalloonServiceImpl implements BalloonService {
 
     @Override
     public List<Balloon> filterByName(String name) {
-        return balloonRepository.findAllByName(name);
+        return balloonRepository.findAllByName(name.toLowerCase());
     }
+
+    @Override
+    public List<Balloon> filterByType(String type) {
+        return balloonRepository.filterByType(type.toLowerCase());
+    }
+
 
 }

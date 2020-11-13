@@ -13,6 +13,7 @@ public interface BalloonService {
     Optional<Balloon> save(String name, String description, Long balloonId, Long id);
     void deleteById(Long id);
     List<Balloon> filterByName(String name);
+    List<Balloon> filterByType(String name);
 
 }
 

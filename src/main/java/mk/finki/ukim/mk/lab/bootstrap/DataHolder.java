@@ -4,6 +4,7 @@ import lombok.Getter;
 import mk.finki.ukim.mk.lab.model.Balloon;
 import mk.finki.ukim.mk.lab.model.Manufacturer;
 import mk.finki.ukim.mk.lab.model.Order;
+import mk.finki.ukim.mk.lab.model.TYPE;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -34,6 +35,10 @@ public class DataHolder {
         balloonList.add(new Balloon("Yellow", "Yellow balloon"));
         balloonList.add(new Balloon("Green", "Green balloon"));
         balloonList.add(new Balloon("White", "White balloon"));
+        balloonList.add(new Balloon("Dark Red", "Dark Red balloon"));
+        balloonList.add(new Balloon("Blue and Red", "Blue and Red balloon", TYPE.HEART));
+        balloonList.add(new Balloon("Light Red", "Light red balloon", TYPE.OVAL));
+
 
         manufacturerList.add(new Manufacturer(Math.abs(UUID.randomUUID().getLeastSignificantBits()),
                 "FirstManufacturer", "Macedonia", "ul. Ruger Boksovikj 16"));

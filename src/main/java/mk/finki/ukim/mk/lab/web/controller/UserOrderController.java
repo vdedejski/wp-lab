@@ -34,7 +34,6 @@ public class UserOrderController {
         }
 
         List<Order> orders = orderListService.findAll();
-        System.out.println(orders.toString());
         model.addAttribute("orders", orders);
         return "userOrders";
     }

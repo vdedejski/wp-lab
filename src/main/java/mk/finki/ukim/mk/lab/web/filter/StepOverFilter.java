@@ -28,7 +28,7 @@ public class StepOverFilter implements Filter {
         if (color == null && !"/balloons".equals(path) && !"/main.css".equals(path)
                 && !"/form".equals(path) && !"/balloons/add".equals(path)
                 && !path.contains("/balloons/delete/") && !path.contains("/balloons/edit-balloon/")
-                && !"/search".equals(path)) {
+                && !"/search".equals(path) && !"/searchByType".equals(path)) {
             response.sendRedirect("/balloons");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);

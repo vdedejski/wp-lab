@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.UUID;
 
+
 @Data
 public class Balloon {
 
@@ -11,11 +12,20 @@ public class Balloon {
     private String description;
     private Long id;
     private Manufacturer manufacturer;
+    private TYPE type = null;
 
     public Balloon(String name, String description) {
         this.name = name;
         this.description = description;
         this.id = Math.abs(UUID.randomUUID().getLeastSignificantBits());
+    }
+
+    public Balloon(String name, String description, TYPE type) {
+        this.name = name;
+        this.description = description;
+        this.type = type;
+        this.id = Math.abs(UUID.randomUUID().getLeastSignificantBits());
+
     }
 
     public Balloon(String name, String description, Manufacturer manufacturer) {
@@ -62,5 +72,13 @@ public class Balloon {
 
     public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    public TYPE getType() {
+        return type;
+    }
+
+    public void setType(TYPE type) {
+        this.type = type;
     }
 }

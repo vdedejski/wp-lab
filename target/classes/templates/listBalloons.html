@@ -69,6 +69,16 @@
 
                 <br/>
 
+                <form th:action="@{/searchByType}" th:method="GET" class="form-inline my-2 my-lg-0">
+                    <input type="text" class="form-control" aria-label="Small"
+                           aria-describedby="inputGroup-sizing-lg"
+                           id="type"
+                           name="type"
+                           placeholder="Search by type...">
+                </form>
+
+                <br/>
+
             </div>
 
             <table class="table table-striped">
@@ -78,6 +88,7 @@
                     <th scope="col">Description</th>
                     <th scope="col">Manufacturer</th>
                     <th scope="col">ID</th>
+                    <th scope="col">Type</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -90,6 +101,7 @@
                     <td th:text="${balloon.getManufacturer() != null}
                             ? ${balloon.getManufacturer().getName()} : 'No Manufacturer'"></td>
                     <td th:text="${balloon.getId()}"></td>
+                    <td th:text="${balloon.getType()}"></td>
                     <td>
                         <form th:method="POST" th:action="@{/balloons}">
                             <button name="balloon" th:value="${balloon.getId()}" type="submit"
