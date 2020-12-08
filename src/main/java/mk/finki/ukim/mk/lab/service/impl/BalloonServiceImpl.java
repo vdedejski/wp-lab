@@ -2,12 +2,14 @@ package mk.finki.ukim.mk.lab.service.impl;
 
 import mk.finki.ukim.mk.lab.model.Balloon;
 import mk.finki.ukim.mk.lab.model.Manufacturer;
+import mk.finki.ukim.mk.lab.model.enumerations.TYPE;
 import mk.finki.ukim.mk.lab.model.exceptions.ManufacturerNotFoundException;
 import mk.finki.ukim.mk.lab.repository.BalloonRepository;
 import mk.finki.ukim.mk.lab.repository.ManufacturerRepository;
 import mk.finki.ukim.mk.lab.service.BalloonService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -18,19 +20,20 @@ public class BalloonServiceImpl implements BalloonService {
     private final BalloonRepository balloonRepository;
     private final ManufacturerRepository manufacturerRepository;
 
-    public BalloonServiceImpl(BalloonRepository balloonRepository, ManufacturerRepository manufacturerRepository){
+    public BalloonServiceImpl(BalloonRepository balloonRepository,
+                              ManufacturerRepository manufacturerRepository) {
         this.balloonRepository = balloonRepository;
         this.manufacturerRepository = manufacturerRepository;
     }
 
     @Override
     public List<Balloon> listAll() {
-        return balloonRepository.findAllBalloons();
+        return balloonRepository.findAll();
     }
 
     @Override
-    public List<Balloon> searchByNameOrDescription(String text) {
-        return balloonRepository.findAllByNameOrDescription(text);
+    public List<Balloon> searchByNameOrDescription(String name) {
+        return balloonRepository.findAllByNameOrDescription(name, name);
     }
 
     @Override
@@ -39,31 +42,25 @@ public class BalloonServiceImpl implements BalloonService {
     }
 
     @Override
-    public Optional<Balloon> save(String name, String description, Long balloonId ,Long id) {
-        Long bid = 1L;
-        Manufacturer manufacturer = this.manufacturerRepository
-                .findById(id)
-                .orElseThrow(() -> new ManufacturerNotFoundException(id));
-
-        if (balloonId == null){
-            bid = Math.abs(UUID.randomUUID().getLeastSignificantBits());
-        }
-        return this.balloonRepository.save(name, description, bid, manufacturer);
-    }
-
-    @Override
     public void deleteById(Long id) {
         balloonRepository.deleteById(id);
     }
 
     @Override
-    public List<Balloon> filterByName(String name) {
+    public List<Balloon> findAllByName(String name) {
         return balloonRepository.findAllByName(name.toLowerCase());
     }
 
     @Override
-    public List<Balloon> filterByType(String type) {
-        return balloonRepository.filterByType(type.toLowerCase());
+    public List<Balloon> findAllByType(String type) {
+        return balloonRepository.findAllByType(TYPE.valueOf(type));
+    }
+
+    @Override
+    @Transactional
+    public Optional<Balloon> save(String name, String description, Long id) {
+        Manufacturer manufacturer =manufacturerRepository.findById(id).orElseThrow(() -> new ManufacturerNotFoundException(id));
+        return Optional.of(this.balloonRepository.save(new Balloon(name, description, manufacturer)));
     }
 
 

@@ -19,15 +19,11 @@ public class BalloonListServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
     private final BalloonService balloonService;
-    private final OrderService orderService;
 
     public BalloonListServlet(SpringTemplateEngine springTemplateEngine,
-                              BalloonService balloonService,
-                              OrderService orderService) {
+                              BalloonService balloonService) {
         this.springTemplateEngine = springTemplateEngine;
         this.balloonService = balloonService;
-        this.orderService = orderService;
-
     }
 
     @Override
@@ -46,7 +42,6 @@ public class BalloonListServlet extends HttpServlet {
 
         req.getSession().setAttribute("color", params);
 
-        orderService.getCurrentOrderStatus().setBalloonColor(params);
         resp.sendRedirect("/SelectBalloonSize");
     }
 }

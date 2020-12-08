@@ -31,8 +31,6 @@ public class SelectBalloonSizeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        context.setVariable("balloonColor", orderService.getCurrentOrderStatus().getBalloonColor());
-        context.setVariable("balloonId", orderService.getCurrentOrderStatus().getBalloonId());
 
         this.springTemplateEngine.process("selectBalloonSize.html", context, resp.getWriter());
 
@@ -42,7 +40,6 @@ public class SelectBalloonSizeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String size = req.getParameter("size");
 
-        orderService.getCurrentOrderStatus().setBalloonSize(size);
         resp.sendRedirect("/BalloonOrder.do");
 
     }

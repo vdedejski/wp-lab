@@ -16,24 +16,17 @@ import java.io.IOException;
 public class BalloonOrderServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
-    private final OrderService orderService;
 
 
     public BalloonOrderServlet(SpringTemplateEngine springTemplateEngine,
-                               BalloonService balloonService,
-                               OrderService orderService) {
+                               BalloonService balloonService) {
         this.springTemplateEngine = springTemplateEngine;
-        this.orderService = orderService;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        req.getSession().setAttribute("size", orderService.getCurrentOrderStatus().getBalloonSize());
-
-        context.setVariable("balloonId", orderService.getCurrentOrderStatus().getBalloonId());
-        context.setVariable("balloonSize", orderService.getCurrentOrderStatus().getBalloonSize());
         this.springTemplateEngine.process("deliveryInfo.html", context, resp.getWriter());
     }
 
@@ -41,8 +34,6 @@ public class BalloonOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String clientName = req.getParameter("clientName");
         String clientAddress = req.getParameter("clientAddress");
-
-        orderService.getCurrentOrderStatus().setClientNameAndAddress(clientName, clientAddress);
 
         resp.sendRedirect("/ConfirmationInfo");
     }

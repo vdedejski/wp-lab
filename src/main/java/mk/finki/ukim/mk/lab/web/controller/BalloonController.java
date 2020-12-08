@@ -17,12 +17,10 @@ import java.util.Optional;
 public class BalloonController {
 
     private final BalloonService balloonService;
-    private final OrderService orderService;
     private final ManufacturerService manufacturerService;
 
-    public BalloonController(BalloonService balloonService, OrderService orderService, ManufacturerService manufacturerService) {
+    public BalloonController(BalloonService balloonService, ManufacturerService manufacturerService) {
         this.balloonService = balloonService;
-        this.orderService = orderService;
         this.manufacturerService = manufacturerService;
     }
 
@@ -49,9 +47,6 @@ public class BalloonController {
         balloon.ifPresent(value -> request.getSession().setAttribute("color", value.getName()));
         balloon.ifPresent(value -> request.getSession().setAttribute("bid", value.getId()));
 
-        balloon.ifPresent(value -> orderService.getCurrentOrderStatus().setBalloonColor(value.getName()));
-        balloon.ifPresent(value -> orderService.getCurrentOrderStatus().setBalloonId(value.getId()));
-
         return "redirect:/SelectBalloonSize";
     }
 
@@ -64,10 +59,9 @@ public class BalloonController {
 
     @PostMapping("/balloons/add")
     public String saveBalloon(@RequestParam String name,
-                              @RequestParam Long balloonId,
                               @RequestParam String description,
-                              @RequestParam Long manufacturer){
-        this.balloonService.save(name, description, balloonId, manufacturer);
+                              @RequestParam Long manufacturer) {
+        this.balloonService.save(name, description, manufacturer);
         return "redirect:/balloons";
     }
 
@@ -78,8 +72,8 @@ public class BalloonController {
     }
 
     @GetMapping("/balloons/edit-balloon/{id}")
-    public String editBalloonPage(@PathVariable Long id, Model model){
-        if(this.balloonService.findById(id).isPresent()){
+    public String editBalloonPage(@PathVariable Long id, Model model) {
+        if (this.balloonService.findById(id).isPresent()) {
             Balloon balloon = this.balloonService.findById(id).get();
             model.addAttribute("manufacturers", this.manufacturerService.findAll());
             model.addAttribute("balloons", this.balloonService.listAll());
@@ -90,8 +84,8 @@ public class BalloonController {
 
     @GetMapping("/search")
     public String getSearchBalloons(@RequestParam String name, Model model) {
-        if(!name.isEmpty()){
-            model.addAttribute("listBalloons", balloonService.filterByName(name));
+        if (!name.isEmpty()) {
+            model.addAttribute("listBalloons", balloonService.findAllByName(name));
             return "listBalloons";
         }
         model.addAttribute("listBalloons", balloonService.listAll());
@@ -100,8 +94,8 @@ public class BalloonController {
 
     @GetMapping("/searchByType")
     public String getByType(@RequestParam String type, Model model) {
-        if(!type.isEmpty()){
-            model.addAttribute("listBalloons", balloonService.filterByType(type));
+        if (!type.isEmpty()) {
+            model.addAttribute("listBalloons", balloonService.findAllByType(type));
             return "listBalloons";
         }
         model.addAttribute("listBalloons", balloonService.listAll());

@@ -17,6 +17,8 @@ public class User {
 
     private String password;
 
+    private String address;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<ShoppingCart> carts;
 
