@@ -27,13 +27,14 @@ public class BalloonController {
     }
 
     @GetMapping("/balloons")
-    public String getBalloonsPage(@RequestParam(required = false) String error, Model model) {
+    public String getBalloonsPage(@RequestParam(required = false) String error, Model model, HttpServletRequest request) {
         if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
 
         List<Balloon> listBalloons = balloonService.listAll();
+        model.addAttribute("userName", request.getHeader("user"));
         model.addAttribute("listBalloons", listBalloons);
         return "listBalloons";
     }

@@ -1,4 +1,4 @@
-package mk.finki.ukim.mk.lab.model;
+package mk.finki.ukim.mk.lab.model.enumerations;
 
 public enum TYPE{
     HEART,

@@ -1,6 +1,7 @@
 package mk.finki.ukim.mk.lab.model;
 
 import lombok.Data;
+import mk.finki.ukim.mk.lab.model.enumerations.TYPE;
 
 import java.util.UUID;
 

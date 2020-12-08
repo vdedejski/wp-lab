@@ -44,6 +44,8 @@
         </div>
         <div class="spinner-grow text-danger" role="status">
         </div>
+        <br/>
+        <h2 th:text="${userName != null} ? 'Hi there, ' + ${userName} : 'Hi there, Guest!'"></h2>
     </div>
 </section>
 
@@ -128,7 +130,7 @@
         </div>
     </div>
 </div>
-</div>
+
 </body>
 </html>
 

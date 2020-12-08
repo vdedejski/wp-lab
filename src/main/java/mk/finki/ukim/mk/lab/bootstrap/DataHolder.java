@@ -4,11 +4,10 @@ import lombok.Getter;
 import mk.finki.ukim.mk.lab.model.Balloon;
 import mk.finki.ukim.mk.lab.model.Manufacturer;
 import mk.finki.ukim.mk.lab.model.Order;
-import mk.finki.ukim.mk.lab.model.TYPE;
+import mk.finki.ukim.mk.lab.model.enumerations.TYPE;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
