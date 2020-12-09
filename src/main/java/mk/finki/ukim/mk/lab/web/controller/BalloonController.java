@@ -3,7 +3,6 @@ package mk.finki.ukim.mk.lab.web.controller;
 import mk.finki.ukim.mk.lab.model.Balloon;
 import mk.finki.ukim.mk.lab.service.BalloonService;
 import mk.finki.ukim.mk.lab.service.ManufacturerService;
-import mk.finki.ukim.mk.lab.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -74,7 +73,7 @@ public class BalloonController {
     @GetMapping("/balloons/edit-balloon/{id}")
     public String editBalloonPage(@PathVariable Long id, Model model) {
         if (this.balloonService.findById(id).isPresent()) {
-            Balloon balloon = this.balloonService.findById(id).get();
+            Optional<Balloon> balloon = this.balloonService.findById(id);
             model.addAttribute("manufacturers", this.manufacturerService.findAll());
             model.addAttribute("balloons", this.balloonService.listAll());
             return "add-balloon";
