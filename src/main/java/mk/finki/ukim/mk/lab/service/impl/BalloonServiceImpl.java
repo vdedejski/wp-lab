@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class BalloonServiceImpl implements BalloonService {
@@ -29,11 +28,6 @@ public class BalloonServiceImpl implements BalloonService {
     @Override
     public List<Balloon> listAll() {
         return balloonRepository.findAll();
-    }
-
-    @Override
-    public List<Balloon> searchByNameOrDescription(String name) {
-        return balloonRepository.findAllByNameOrDescription(name, name);
     }
 
     @Override
@@ -59,7 +53,7 @@ public class BalloonServiceImpl implements BalloonService {
     @Override
     @Transactional
     public Optional<Balloon> save(String name, String description, Long id) {
-        Manufacturer manufacturer =manufacturerRepository.findById(id).orElseThrow(() -> new ManufacturerNotFoundException(id));
+        Manufacturer manufacturer = manufacturerRepository.findById(id).orElseThrow(() -> new ManufacturerNotFoundException(id));
         return Optional.of(this.balloonRepository.save(new Balloon(name, description, manufacturer)));
     }
 

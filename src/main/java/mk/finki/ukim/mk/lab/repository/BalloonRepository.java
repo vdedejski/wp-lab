@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface BalloonRepository extends JpaRepository<Balloon, Long> {
-    List<Balloon> findAllByNameOrDescription(String name, String description);
     List<Balloon> findAllByName(String name);
     List<Balloon> findAllByType(TYPE type);
 }
