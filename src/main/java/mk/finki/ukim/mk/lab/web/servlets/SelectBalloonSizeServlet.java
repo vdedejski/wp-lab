@@ -16,19 +16,14 @@ import java.io.IOException;
 public class SelectBalloonSizeServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
-    private final OrderService orderService;
 
 
-    public SelectBalloonSizeServlet(SpringTemplateEngine springTemplateEngine,
-                                    BalloonService balloonService,
-                                    OrderService orderService) {
+    public SelectBalloonSizeServlet(SpringTemplateEngine springTemplateEngine) {
         this.springTemplateEngine = springTemplateEngine;
-        this.orderService = orderService;
-
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
 
@@ -37,7 +32,7 @@ public class SelectBalloonSizeServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String size = req.getParameter("size");
 
         resp.sendRedirect("/BalloonOrder.do");
