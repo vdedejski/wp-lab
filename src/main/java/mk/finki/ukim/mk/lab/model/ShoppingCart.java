@@ -18,7 +18,8 @@ public class ShoppingCart {
 
     private LocalDateTime dateCreated;
 
-    // TODO 6 TABLES ---> refactor or ask!! Sholud this be @OneToMany, @OneToOne (this makes sense to me), or @ManyToMany
+    // TODO 6 TABLES ---> refactor or ask!! Sholud this be @OneToMany,
+    //  @OneToOne (this makes sense to me if order is refactored), or @ManyToMany
     // Is one order - one shopping cart or several orders one shopping carts ??
     @OneToMany
     private List<Order> orders;

@@ -26,7 +26,7 @@ public class BalloonServiceImpl implements BalloonService {
     }
 
     @Override
-    public List<Balloon> listAll() {
+    public List<Balloon> findAll() {
         return balloonRepository.findAll();
     }
 

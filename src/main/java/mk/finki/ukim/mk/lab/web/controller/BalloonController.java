@@ -30,7 +30,7 @@ public class BalloonController {
             model.addAttribute("error", error);
         }
 
-        List<Balloon> listBalloons = balloonService.listAll();
+        List<Balloon> listBalloons = balloonService.findAll();
         model.addAttribute("userName", request.getHeader("user"));
         model.addAttribute("listBalloons", listBalloons);
         return "listBalloons";
@@ -51,7 +51,7 @@ public class BalloonController {
 
     @GetMapping("/form")
     public String addProductPage(Model model) {
-        model.addAttribute("balloons", balloonService.listAll());
+        model.addAttribute("balloons", balloonService.findAll());
         model.addAttribute("manufacturers", manufacturerService.findAll());
         return "add-balloon";
     }
@@ -75,7 +75,7 @@ public class BalloonController {
         if (this.balloonService.findById(id).isPresent()) {
             Optional<Balloon> balloon = this.balloonService.findById(id);
             model.addAttribute("manufacturers", this.manufacturerService.findAll());
-            model.addAttribute("balloons", this.balloonService.listAll());
+            model.addAttribute("balloons", this.balloonService.findAll());
             return "add-balloon";
         }
         return "redirect:/products?error=BalloonNotFound";
@@ -87,7 +87,7 @@ public class BalloonController {
             model.addAttribute("listBalloons", balloonService.findAllByName(name));
             return "listBalloons";
         }
-        model.addAttribute("listBalloons", balloonService.listAll());
+        model.addAttribute("listBalloons", balloonService.findAll());
         return "redirect:/balloons";
     }
 
@@ -97,7 +97,7 @@ public class BalloonController {
             model.addAttribute("listBalloons", balloonService.findAllByType(type));
             return "listBalloons";
         }
-        model.addAttribute("listBalloons", balloonService.listAll());
+        model.addAttribute("listBalloons", balloonService.findAll());
         return "redirect:/balloons";
     }
 

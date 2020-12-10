@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BalloonService {
-    List<Balloon> listAll();
+    List<Balloon> findAll();
     Optional<Balloon> findById(Long id);
     void deleteById(Long id);
     List<Balloon> findAllByName(String name);
