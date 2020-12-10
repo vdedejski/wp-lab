@@ -106,9 +106,9 @@
                     <td th:text="${balloon.getId()}"></td>
                     <td th:text="${balloon.getType()}"></td>
                     <td>
-                        <form th:method="POST" th:action="@{/balloons}">
+                        <form th:method="POST" th:action="@{'/add-product/{id}' (id=${balloon.getId()})}">
                             <button name="balloon" th:value="${balloon.getId()}" type="submit"
-                                    class="btn btn-success btn-sm">Order
+                                    class="btn btn-success btn-sm">Add to cart
                             </button>
                         </form>
                     </td>
