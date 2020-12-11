@@ -1,12 +1,9 @@
 package mk.finki.ukim.mk.lab.service.impl;
 
-import mk.finki.ukim.mk.lab.model.Balloon;
 import mk.finki.ukim.mk.lab.model.Order;
 import mk.finki.ukim.mk.lab.model.ShoppingCart;
 import mk.finki.ukim.mk.lab.model.User;
 import mk.finki.ukim.mk.lab.model.enumerations.ShoppingCartStatus;
-import mk.finki.ukim.mk.lab.model.exceptions.OrderAlreadyInShoppingCartException;
-import mk.finki.ukim.mk.lab.model.exceptions.OrderNotFoundException;
 import mk.finki.ukim.mk.lab.model.exceptions.ShoppingCartNotFoundException;
 import mk.finki.ukim.mk.lab.model.exceptions.UserNotFoundException;
 import mk.finki.ukim.mk.lab.repository.BalloonRepository;
@@ -76,5 +73,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         shoppingCart.getOrders().add(order);
         return this.shoppingCartRepository.save(shoppingCart);
+    }
+
+    @Override
+    public ShoppingCart findShoppingCart(Long id) {
+        if (this.shoppingCartRepository.findById(id).isPresent()){
+            return this.shoppingCartRepository.findById(id).get();
+        }else {
+            throw new ShoppingCartNotFoundException(id);
+        }
     }
 }

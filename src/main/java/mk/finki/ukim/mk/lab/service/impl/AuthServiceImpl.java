@@ -1,13 +1,12 @@
 package mk.finki.ukim.mk.lab.service.impl;
 
 import mk.finki.ukim.mk.lab.model.User;
-import mk.finki.ukim.mk.lab.model.exceptions.InvalidArgumentsException;
-import mk.finki.ukim.mk.lab.model.exceptions.InvalidUserCredentialsException;
-import mk.finki.ukim.mk.lab.model.exceptions.PasswordsDoNotMatchException;
-import mk.finki.ukim.mk.lab.model.exceptions.UsernameAlreadyExistsException;
+import mk.finki.ukim.mk.lab.model.exceptions.*;
 import mk.finki.ukim.mk.lab.repository.UserRepository;
 import mk.finki.ukim.mk.lab.service.AuthService;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -40,6 +39,15 @@ public class AuthServiceImpl implements AuthService {
 
         User user = new User(username, password, address);
         return userRepository.save(user);
+    }
+
+    @Override
+    public User getUser(String username) {
+        if (this.userRepository.findByUsername(username).isPresent()) {
+            return this.userRepository.findByUsername(username).get();
+        } else {
+            throw new UserNotFoundException(username);
+        }
     }
 
 }
