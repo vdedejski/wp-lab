@@ -1,11 +1,8 @@
 package mk.finki.ukim.mk.lab.web.servlets;
 
-import mk.finki.ukim.mk.lab.service.BalloonService;
-import mk.finki.ukim.mk.lab.service.OrderService;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

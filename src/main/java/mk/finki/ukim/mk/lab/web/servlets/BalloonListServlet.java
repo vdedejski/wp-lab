@@ -1,8 +1,6 @@
 package mk.finki.ukim.mk.lab.web.servlets;
 
-import mk.finki.ukim.mk.lab.model.Balloon;
 import mk.finki.ukim.mk.lab.service.BalloonService;
-import mk.finki.ukim.mk.lab.service.OrderService;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "balloon-list-servlet", urlPatterns = "/servlet")
 public class BalloonListServlet extends HttpServlet {

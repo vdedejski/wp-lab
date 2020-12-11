@@ -75,8 +75,6 @@ public class BalloonController {
         if (this.balloonService.findById(id).isPresent()) {
             Optional<Balloon> balloon = this.balloonService.findById(id);
             model.addAttribute("manufacturers", this.manufacturerService.findAll());
-//            model.addAttribute("balloonName", this.balloonService.findById(id).get().getName());
-//            model.addAttribute("balloonDesc", this.balloonService.findById(id).get().getDescription());
             model.addAttribute("balloons", this.balloonService.findAll());
             model.addAttribute("balloon", balloon.get());
             return "add-balloon";
