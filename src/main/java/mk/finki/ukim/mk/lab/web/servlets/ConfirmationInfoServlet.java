@@ -1,6 +1,5 @@
 package mk.finki.ukim.mk.lab.web.servlets;
 
-import mk.finki.ukim.mk.lab.service.OrderService;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -24,14 +23,8 @@ public class ConfirmationInfoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-//        context.setVariable("clientName", orderService.getCurrentOrderStatus().getUser().getAddress());
-//        context.setVariable("clientAddress", orderService.getCurrentOrderStatus().getUser().getUsername());
         context.setVariable("clientIP", req.getRemoteAddr());
         context.setVariable("clientBrowser", req.getHeader("user-agent"));
-//        context.setVariable("balloonColor", orderService.getCurrentOrderStatus().getBalloonColor());
-//        context.setVariable("balloonSize", orderService.getCurrentOrderStatus().getBalloonSize());
-//        context.setVariable("balloonId", orderService.getCurrentOrderStatus().getBalloonId());
-
 
         this.springTemplateEngine.process("confirmationInfo.html", context, resp.getWriter());
     }
