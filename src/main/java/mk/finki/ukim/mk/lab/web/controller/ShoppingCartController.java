@@ -1,7 +1,9 @@
 package mk.finki.ukim.mk.lab.web.controller;
 
+import mk.finki.ukim.mk.lab.model.Balloon;
 import mk.finki.ukim.mk.lab.model.ShoppingCart;
 import mk.finki.ukim.mk.lab.model.User;
+import mk.finki.ukim.mk.lab.service.BalloonService;
 import mk.finki.ukim.mk.lab.service.ShoppingCartService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,16 +16,19 @@ import javax.servlet.http.HttpServletRequest;
 public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
+    private final BalloonService balloonService;
 
-    public ShoppingCartController(ShoppingCartService shoppingCartService) {
+    public ShoppingCartController(ShoppingCartService shoppingCartService,
+                                  BalloonService balloonService) {
         this.shoppingCartService = shoppingCartService;
+        this.balloonService = balloonService;
     }
 
     @GetMapping
     public String getShoppingCartPage(@RequestParam(required = false) String error,
                                       HttpServletRequest req,
                                       Model model) {
-        if(error != null && !error.isEmpty()){
+        if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
@@ -34,12 +39,15 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/add-product/{id}")
-    public String addProductToShoppingCart(@PathVariable Long id, HttpServletRequest req) {
-        try{
+    public String addProductToShoppingCart(@RequestParam(value = "balloon") Long balloonId,
+                                           @RequestParam(value = "size") String size,
+                                           HttpServletRequest req, @PathVariable String id) {
+        req.getSession().setAttribute("color", this.balloonService.findById(balloonId).get().getName());
+        try {
             User user = (User) req.getSession().getAttribute("user");
-            ShoppingCart shoppingCart = this.shoppingCartService.addProductToShoppingCart(user.getUsername(), id);
+            this.shoppingCartService.addProductToShoppingCart(user.getUsername(), balloonId, size, user.getId());
             return "redirect:/shopping-cart";
-        }catch (RuntimeException exception) {
+        } catch (RuntimeException exception) {
             return "redirect:/shopping-cart?error=" + exception.getMessage();
         }
     }

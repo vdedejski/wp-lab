@@ -35,7 +35,8 @@ public class StepOverFilter implements Filter {
                 && !path.contains("/balloons/delete/") && !path.contains("/balloons/edit-balloon/")
                 && !"/search".equals(path) && !"/searchByType".equals(path)
                 && !"/login".equals(path) && !"/register".equals(path)
-                && !"/shopping-cart".equals(path)) {
+                && !"/shopping-cart".equals(path) && !"/".equals(path)
+                && !path.contains("/add-product") && !"/checkout".equals(path)) {
             response.sendRedirect("/balloons");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);

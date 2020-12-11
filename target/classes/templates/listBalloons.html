@@ -32,6 +32,15 @@
             </ul>
         </div>
     </div>
+
+    <form class="form-inline my-2 my-lg-0">
+        <a class="btn btn-success btn-sm ml-3" href="/shopping-cart">
+            <i class="fa fa-shopping-cart"></i> Cart
+        </a>
+        <a class="btn btn-light btn-sm ml-3" href="/logout">
+            <i class="fa fa-shopping-cart"></i> Logout
+        </a>
+    </form>
 </nav>
 <section class="jumbotron text-center">
     <div class="container">
@@ -92,6 +101,7 @@
                     <th scope="col">Manufacturer</th>
                     <th scope="col">ID</th>
                     <th scope="col">Type</th>
+                    <th scope="col">Size</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -99,19 +109,32 @@
                 </thead>
                 <tbody>
                 <tr th:each="balloon : ${listBalloons}">
-                    <td th:text="${balloon.getName()}"></td>
-                    <td th:text="${balloon.getDescription()}"></td>
-                    <td th:text="${balloon.getManufacturer() != null}
+                    <form th:method="POST" th:action="@{'shopping-cart/add-product/{id}' (id=${balloon.getId()})}">
+                        <td th:text="${balloon.getName()}"></td>
+                        <td th:text="${balloon.getDescription()}"></td>
+                        <td th:text="${balloon.getManufacturer() != null}
                             ? ${balloon.getManufacturer().getName()} : 'No Manufacturer'"></td>
-                    <td th:text="${balloon.getId()}"></td>
-                    <td th:text="${balloon.getType()}"></td>
-                    <td>
-                        <form th:method="POST" th:action="@{'/add-product/{id}' (id=${balloon.getId()})}">
+                        <td th:text="${balloon.getId()}"></td>
+                        <td th:text="${balloon.getType()}"></td>
+                        <td>
+                            <select name="size" class="form-control" required>
+                                <option th:value="small"
+                                        th:text="Small">
+                                </option>
+                                <option th:value="large"
+                                        th:text="Large">
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <!--                            <form th:method="POST"-->
+                            <!--                                  th:action="@{'shopping-cart/add-product/{id}' (id=${balloon.getId()})}">-->
                             <button name="balloon" th:value="${balloon.getId()}" type="submit"
                                     class="btn btn-success btn-sm">Add to cart
                             </button>
-                        </form>
-                    </td>
+                        </td>
+                    </form>
+
                     <td>
                         <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">
                             <button type="submit" class="btn btn-sm btn-danger btn-sm"><i

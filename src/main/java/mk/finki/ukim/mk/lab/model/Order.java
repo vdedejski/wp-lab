@@ -1,8 +1,10 @@
 package mk.finki.ukim.mk.lab.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Data
 @Entity
@@ -20,6 +22,13 @@ public class Order {
     @ManyToOne
     private User user;
 
+    public Order(String balloonColor, String balloonSize, User user) {
+        this.balloonColor = balloonColor;
+        this.balloonSize = balloonSize;
+        this.user = user;
+    }
+
     public Order() {
+
     }
 }
