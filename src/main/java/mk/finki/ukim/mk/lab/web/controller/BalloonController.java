@@ -83,9 +83,10 @@ public class BalloonController {
     }
 
     @GetMapping("/search")
-    public String getSearchBalloons(@RequestParam String name, Model model) {
+    public String getSearchBalloons(@RequestParam String name, Model model, HttpServletRequest request) {
+        model.addAttribute("userName", request.getSession().getAttribute("username"));
         if (!name.isEmpty()) {
-            model.addAttribute("listBalloons", balloonService.findAllByName(name));
+            model.addAttribute("listBalloons", balloonService.findAllByNameOrDescriptionOrTypeOrManufacturer(name));
             return "listBalloons";
         }
         model.addAttribute("listBalloons", balloonService.findAll());

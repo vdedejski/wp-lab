@@ -13,5 +13,6 @@ public interface BalloonService {
     List<Balloon> findAllByName(String name);
     List<Balloon> findAllByType(String name);
     Optional<Balloon> save(String name, String description, Long id);
+    List<Balloon> findAllByNameOrDescriptionOrTypeOrManufacturer(String text);
 }
 

@@ -57,5 +57,9 @@ public class BalloonServiceImpl implements BalloonService {
         return Optional.of(this.balloonRepository.save(new Balloon(name, description, manufacturer)));
     }
 
+    @Override
+    public List<Balloon> findAllByNameOrDescriptionOrTypeOrManufacturer(String text){
+        return balloonRepository.findAllByNameOrDescriptionOrManufacturer_Name(text, text, text);
+    }
 
 }
