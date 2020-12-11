@@ -21,6 +21,17 @@ public class Shipped {
     @OneToOne
     private ShoppingCart shoppingCart;
 
+    Boolean isShipped;
+
+    String trackingNumber;
+
     public Shipped() {
+    }
+
+    public Shipped(User user, ShoppingCart shoppingCart, Boolean isShipped) {
+        this.user = user;
+        this.shoppingCart = shoppingCart;
+        this.isShipped = isShipped;
+        this.dateCreated = LocalDateTime.now();
     }
 }

@@ -1,6 +1,5 @@
 package mk.finki.ukim.mk.lab.web.controller;
 
-import mk.finki.ukim.mk.lab.model.Balloon;
 import mk.finki.ukim.mk.lab.model.ShoppingCart;
 import mk.finki.ukim.mk.lab.model.User;
 import mk.finki.ukim.mk.lab.service.BalloonService;
@@ -45,7 +44,8 @@ public class ShoppingCartController {
         req.getSession().setAttribute("color", this.balloonService.findById(balloonId).get().getName());
         try {
             User user = (User) req.getSession().getAttribute("user");
-            this.shoppingCartService.addProductToShoppingCart(user.getUsername(), balloonId, size, user.getId());
+            ShoppingCart shoppingCart = this.shoppingCartService.addProductToShoppingCart(user.getUsername(), balloonId, size, user.getId());
+            req.getSession().setAttribute("cart", shoppingCart.getId());
             return "redirect:/shopping-cart";
         } catch (RuntimeException exception) {
             return "redirect:/shopping-cart?error=" + exception.getMessage();
