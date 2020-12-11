@@ -26,9 +26,6 @@ public class StepOverFilter implements Filter {
 
         String path = request.getServletPath();
         System.out.println(path);
-//        if (user == null && !"/balloons".equals(path) && !"/".equals(path)) {
-//            response.sendRedirect("/login");
-//        }
 
         if (color == null && !"/balloons".equals(path) && !"/main.css".equals(path)
                 && !"/form".equals(path) && !"/balloons/add".equals(path)
