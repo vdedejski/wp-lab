@@ -10,6 +10,7 @@ import mk.finki.ukim.mk.lab.service.BalloonService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +60,14 @@ public class BalloonServiceImpl implements BalloonService {
 
     @Override
     public List<Balloon> findAllByNameOrDescriptionOrTypeOrManufacturer(String text){
+        TYPE[] values = TYPE.values();
+
+        for(TYPE type : values){
+            if(type.toString().equals(text)){
+                System.out.println("comes here");
+                return balloonRepository.findAllByType(TYPE.valueOf(text));
+            }
+        }
         return balloonRepository.findAllByNameOrDescriptionOrManufacturer_Name(text, text, text);
     }
 
