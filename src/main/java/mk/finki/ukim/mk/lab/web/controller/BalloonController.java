@@ -33,7 +33,8 @@ public class BalloonController {
         List<Balloon> listBalloons = balloonService.findAll();
         model.addAttribute("userName", request.getSession().getAttribute("username"));
         model.addAttribute("listBalloons", listBalloons);
-        return "listBalloons";
+        model.addAttribute("bodyContent", "listBalloons");
+        return "master-template";
     }
 
     @PostMapping("/balloons")
@@ -87,20 +88,12 @@ public class BalloonController {
         model.addAttribute("userName", request.getSession().getAttribute("username"));
         if (!name.isEmpty()) {
             model.addAttribute("listBalloons", balloonService.findAllByNameOrDescriptionOrTypeOrManufacturer(name));
-            return "listBalloons";
+            model.addAttribute("bodyContent", "listBalloons");
+            return "master-template";
         }
         model.addAttribute("listBalloons", balloonService.findAll());
-        return "listBalloons";
-    }
-
-    @GetMapping("/searchByType")
-    public String getByType(@RequestParam String type, Model model) {
-        if (!type.isEmpty()) {
-            model.addAttribute("listBalloons", balloonService.findAllByType(type));
-            return "listBalloons";
-        }
-        model.addAttribute("listBalloons", balloonService.findAll());
-        return "redirect:/balloons";
+        model.addAttribute("bodyContent", "listBalloons");
+        return "master-template";
     }
 
 }
