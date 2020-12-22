@@ -90,7 +90,7 @@ public class BalloonController {
             return "listBalloons";
         }
         model.addAttribute("listBalloons", balloonService.findAll());
-        return "redirect:/balloons";
+        return "listBalloons";
     }
 
     @GetMapping("/searchByType")
