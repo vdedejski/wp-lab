@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface BalloonRepository extends JpaRepository<Balloon, Long> {
     List<Balloon> findAllByName(String name);
-    List<Balloon> findAllByNameOrDescriptionOrManufacturer_Name(String text, String text1, String text2);
+    List<Balloon> findAllByNameContainingOrDescriptionContainingOrManufacturer_Name(String text, String text1, String text2);
     List<Balloon> findAllByType(TYPE type);
 }

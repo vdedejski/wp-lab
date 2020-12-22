@@ -68,7 +68,7 @@ public class BalloonServiceImpl implements BalloonService {
                 return balloonRepository.findAllByType(TYPE.valueOf(text));
             }
         }
-        return balloonRepository.findAllByNameOrDescriptionOrManufacturer_Name(text, text, text);
+        return balloonRepository.findAllByNameContainingOrDescriptionContainingOrManufacturer_Name(text, text, text);
     }
 
 }
