@@ -3,6 +3,7 @@ package mk.finki.ukim.mk.lab.web.controller;
 import mk.finki.ukim.mk.lab.model.Balloon;
 import mk.finki.ukim.mk.lab.service.BalloonService;
 import mk.finki.ukim.mk.lab.service.ManufacturerService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +52,7 @@ public class BalloonController {
     }
 
     @GetMapping("/form")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String addProductPage(Model model) {
         model.addAttribute("balloons", balloonService.findAll());
         model.addAttribute("manufacturers", manufacturerService.findAll());
@@ -95,6 +97,12 @@ public class BalloonController {
         }
         model.addAttribute("listBalloons", balloonService.findAll());
         model.addAttribute("bodyContent", "listBalloons");
+        return "master-template";
+    }
+
+    @GetMapping("access_denied")
+    public String accessDeniedPage(Model model){
+        model.addAttribute("bodyContent", "access_denied");
         return "master-template";
     }
 

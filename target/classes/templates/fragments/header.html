@@ -1,4 +1,4 @@
-<header>
+<header xmlns:th="http://www.w3.org/1999/html">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/balloons">THE BALLOON SHOP</a>
@@ -11,6 +11,10 @@
                 <ul class="navbar-nav m-auto">
                     <li class="nav-item m-auto">
                         <a class="nav-link active" href="/balloons">Home</a>
+                    </li>
+                    <li class="nav-item m-auto">
+                        <th:block th:if="${#request.getRemoteUser()!=null}"
+                        th:text="${#request.getRemoteUser()}"/>
                     </li>
                 </ul>
             </div>
