@@ -54,7 +54,8 @@ public class BalloonController {
     public String addProductPage(Model model) {
         model.addAttribute("balloons", balloonService.findAll());
         model.addAttribute("manufacturers", manufacturerService.findAll());
-        return "add-balloon";
+        model.addAttribute("bodyContent", "add-balloon");
+        return "master-template";
     }
 
     @PostMapping("/balloons/add")
@@ -78,7 +79,8 @@ public class BalloonController {
             model.addAttribute("manufacturers", this.manufacturerService.findAll());
             model.addAttribute("balloons", this.balloonService.findAll());
             model.addAttribute("balloon", balloon.get());
-            return "add-balloon";
+            model.addAttribute("bodyContent", "add-balloon");
+            return "master-template";
         }
         return "redirect:/products?error=BalloonNotFound";
     }

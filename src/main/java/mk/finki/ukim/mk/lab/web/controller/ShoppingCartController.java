@@ -34,18 +34,21 @@ public class ShoppingCartController {
         User user = (User) req.getSession().getAttribute("user");
         ShoppingCart shoppingCart = this.shoppingCartService.getActiveShoppingCart(user.getUsername());
         model.addAttribute("orders", this.shoppingCartService.listAllOrdersInShoppingCart(shoppingCart.getId()));
-        return "shopping-cart";
+        model.addAttribute("bodyContent", "shopping-cart");
+        return "master-template";
     }
 
     @PostMapping("/add-product/{id}")
     public String addProductToShoppingCart(@RequestParam(value = "balloon") Long balloonId,
                                            @RequestParam(value = "size") String size,
-                                           HttpServletRequest req, @PathVariable String id) {
+                                           HttpServletRequest req, @PathVariable String id,
+                                           Model model) {
         req.getSession().setAttribute("color", this.balloonService.findById(balloonId).get().getName());
         try {
             User user = (User) req.getSession().getAttribute("user");
             ShoppingCart shoppingCart = this.shoppingCartService.addProductToShoppingCart(user.getUsername(), balloonId, size, user.getId());
             req.getSession().setAttribute("cart", shoppingCart.getId());
+//            model.addAttribute("bodyContent", "shopping-cart");
             return "redirect:/shopping-cart";
         } catch (RuntimeException exception) {
             return "redirect:/shopping-cart?error=" + exception.getMessage();

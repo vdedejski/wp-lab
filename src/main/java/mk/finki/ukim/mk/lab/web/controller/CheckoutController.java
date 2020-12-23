@@ -43,6 +43,7 @@ public class CheckoutController {
         this.shoppingCartService.findShoppingCart(Long.valueOf(request.getSession().getAttribute("cart").toString())).setStatus(ShoppingCartStatus.FINISHED);
         this.shippedService.save(new Shipped(user, shoppingCart, false));
 
-        return "checkout";
+        model.addAttribute("bodyContent", "checkout");
+        return "master-template";
     }
 }
