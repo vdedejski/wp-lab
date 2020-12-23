@@ -31,8 +31,8 @@ public class ShoppingCartController {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
-        User user = (User) req.getSession().getAttribute("user");
-        ShoppingCart shoppingCart = this.shoppingCartService.getActiveShoppingCart(user.getUsername());
+        String username = req.getRemoteUser();
+        ShoppingCart shoppingCart = this.shoppingCartService.getActiveShoppingCart(username);
         model.addAttribute("orders", this.shoppingCartService.listAllOrdersInShoppingCart(shoppingCart.getId()));
         model.addAttribute("bodyContent", "shopping-cart");
         return "master-template";
@@ -45,8 +45,8 @@ public class ShoppingCartController {
                                            Model model) {
         req.getSession().setAttribute("color", this.balloonService.findById(balloonId).get().getName());
         try {
-            User user = (User) req.getSession().getAttribute("user");
-            ShoppingCart shoppingCart = this.shoppingCartService.addProductToShoppingCart(user.getUsername(), balloonId, size, user.getId());
+            String username = req.getRemoteUser();
+            ShoppingCart shoppingCart = this.shoppingCartService.addProductToShoppingCart(username, balloonId, size);
             req.getSession().setAttribute("cart", shoppingCart.getId());
 //            model.addAttribute("bodyContent", "shopping-cart");
             return "redirect:/shopping-cart";

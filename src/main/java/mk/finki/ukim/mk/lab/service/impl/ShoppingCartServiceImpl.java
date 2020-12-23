@@ -58,18 +58,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     // TODO REFACTOR!!
     @Override
     @Transactional
-    public ShoppingCart addProductToShoppingCart(String username, Long balloonId, String ballonSize, Long userId) {
+    public ShoppingCart addProductToShoppingCart(String username, Long balloonId, String ballonSize) {
         ShoppingCart shoppingCart = this.getActiveShoppingCart(username);
 
         Order order = new Order(this.balloonRepository.findById(balloonId).get().getName(),
-                ballonSize, this.userRepository.findById(userId).get());
-
-//        shoppingCart.getOrders()
-//                .forEach(x -> {
-//                    if (x.getBalloonColor().equals(this.balloonRepository.findById(balloonId).get().getName())
-//                            && x.getBalloonSize().equals(ballonSize))
-//                        throw new OrderAlreadyInShoppingCartException();
-//                });
+                ballonSize, this.userRepository.findByUsername(username).get());
 
         shoppingCart.getOrders().add(order);
         return this.shoppingCartRepository.save(shoppingCart);

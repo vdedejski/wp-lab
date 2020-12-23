@@ -1,21 +1,4 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h1 class="jumbotron-heading">AVAILABLE BALOONS</h1>
-            <div class="spinner-grow text-primary" role="status">
-            </div>
-            <div class="spinner-grow text-secondary" role="status">
-            </div>
-            <div class="spinner-grow text-success" role="status">
-            </div>
-            <div class="spinner-grow text-danger" role="status">
-            </div>
-            <br/>
-            <h2 th:text="${userName != null} ? 'Hi there, ' + ${userName} : 'Hi there, Guest!'"></h2>
-
-        </div>
-    </section>
-
     <div class="container mb-4">
         <div class="row">
             <div class="col-12">
@@ -75,26 +58,33 @@
                                 </select>
                             </td>
                             <td>
-                                <!--                            <form th:method="POST"-->
-                                <!--                                  th:action="@{'shopping-cart/add-product/{id}' (id=${balloon.getId()})}">-->
-                                <button name="balloon" th:value="${balloon.getId()}" type="submit"
-                                        class="btn btn-success btn-sm">Add to cart
-                                </button>
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <button name="balloon" th:value="${balloon.getId()}" type="submit"
+                                            class="btn btn-success btn-sm">Add to cart
+                                    </button>
+                                </th:block>
                             </td>
                         </form>
 
                         <td>
-                            <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">
-                                <button type="submit" class="btn btn-sm btn-danger btn-sm"><i
-                                        class="fa fa-trash">Delete</i>
-                                </button>
-                            </form>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">
+
+                                    <button type="submit" class="btn btn-sm btn-danger btn-sm"><i
+                                            class="fa fa-trash">Delete</i>
+                                    </button>
+                                </form>
+                            </th:block>
                         </td>
                         <td>
-                            <form th:action="@{'/balloons/edit-balloon/{id}' (id=${balloon.getId()})}" th:method="GET">
-                                <button type="submit" class="btn btn-sm btn-info btn-sm"><i class="fa fa-trash">Edit</i>
-                                </button>
-                            </form>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <form th:action="@{'/balloons/edit-balloon/{id}' (id=${balloon.getId()})}"
+                                      th:method="GET">
+                                    <button type="submit" class="btn btn-sm btn-info btn-sm"><i
+                                            class="fa fa-trash">Edit</i>
+                                    </button>
+                                </form>
+                            </th:block>
                         </td>
                     </tr>
                     </tbody>
