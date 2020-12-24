@@ -20,49 +20,42 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.List;
+import java.util.Optional;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserRegistrationTest {
+public class ShoppingCartServiceTest {
 
     @Mock
-    private final ShoppingCartRepository shoppingCartRepository;
+    private ShoppingCartRepository shoppingCartRepository;
 
     @Mock
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Mock
-    private final BalloonRepository balloonRepository;
+    private BalloonRepository balloonRepository;
 
     private ShoppingCartService service;
-    
+
     @Before
-    public void init(){
+    public void init() {
         MockitoAnnotations.initMocks(this);
 
         ShoppingCart shoppingCart = new ShoppingCart();
         User user = new User();
         Balloon balloon = new Balloon();
 
-        Mockito.when(this.shoppingCartRepository.save(Mockito.any(ShoppingCart.class))).thenReturn(shoppingCart);
-        Mockito.when(this.userRepository.save(Mockito.any(User.class))).thenReturn(user);
-        Mockito.when(this.balloonRepository.save(Mockito.any(Balloon.class))).thenReturn(balloon);
-
         this.service = Mockito.spy(new ShoppingCartServiceImpl(this.shoppingCartRepository, this.userRepository, this.balloonRepository));
     }
 
     @Test
-    public void testFindShoppingCart(){
-        ShoppingCart shoppingCart = this.service.findShoppingCart(1L);
-        Mockito.verify(this.service).findShoppingCart(1L);
-
-        Assert.assertNotNull("Shopping cart is null", shoppingCart);
+    public void testFindShoppingCart() {
+        Assert.assertThrows("ShoppingCartNotFoundException",
+                ShoppingCartNotFoundException.class,
+                () -> this.service.findShoppingCart(1L));
     }
 
     @Test
-    public void testFindShoppingCartNotExists(){
-        ShoppingCart shoppingCart = this.service.findShoppingCart(0L);
-
+    public void testFindShoppingCartNotExists() {
         Assert.assertThrows("ShoppingCartNotFoundException expected",
                 ShoppingCartNotFoundException.class,
                 () -> this.service.findShoppingCart(0L));
@@ -71,27 +64,15 @@ public class UserRegistrationTest {
     }
 
     @Test
-    public void testGetActiveShoppingCart(){
-        ShoppingCart shoppingCart = this.service.getActiveShoppingCart("test");
-
-        Assert.assertThrows("UserNotFoundException expected",
-                UserNotFoundException.class,
-                () -> this.userRepository.findByUsername("test"));
+    public void testGetActiveShoppingCart() {
+        Assert.assertEquals(Optional.empty(), this.userRepository.findByUsername("test"));
     }
 
     @Test
-    public void testListAllOrdersInShoppingCart(){
-        List<Order> shoppingCartList = this.service.listAllOrdersInShoppingCart(0L);
+    public void testListAllOrdersInShoppingCart() {
         Assert.assertThrows("ShoppingCartNotFoundException",
                 ShoppingCartNotFoundException.class,
-                () -> this.service.listAllOrdersInShoppingCart(0L));
+                () -> this.service.listAllOrdersInShoppingCart(1L));
 
-
-    }
-
-    @Test
-    public void testAddProductToShoppingCart(){
-        ShoppingCart shoppingCart = this.service.getActiveShoppingCart("test");
-        Mockito.verify(this.service).getActiveShoppingCart("test");
     }
 }
