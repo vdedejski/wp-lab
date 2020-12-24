@@ -6,8 +6,6 @@ import mk.finki.ukim.mk.lab.repository.UserRepository;
 import mk.finki.ukim.mk.lab.service.AuthService;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class AuthServiceImpl implements AuthService {
 

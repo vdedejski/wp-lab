@@ -9,29 +9,25 @@ import mk.finki.ukim.mk.lab.model.exceptions.UserNotFoundException;
 import mk.finki.ukim.mk.lab.repository.BalloonRepository;
 import mk.finki.ukim.mk.lab.repository.ShoppingCartRepository;
 import mk.finki.ukim.mk.lab.repository.UserRepository;
-import mk.finki.ukim.mk.lab.service.OrderService;
 import mk.finki.ukim.mk.lab.service.ShoppingCartService;
 
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
+
     private final ShoppingCartRepository shoppingCartRepository;
     private final UserRepository userRepository;
-    private final OrderService orderService;
     private final BalloonRepository balloonRepository;
 
     public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository,
                                    UserRepository userRepository,
-                                   OrderService orderService,
                                    BalloonRepository balloonRepository) {
         this.shoppingCartRepository = shoppingCartRepository;
         this.userRepository = userRepository;
-        this.orderService = orderService;
         this.balloonRepository = balloonRepository;
     }
 
@@ -70,9 +66,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart findShoppingCart(Long id) {
-        if (this.shoppingCartRepository.findById(id).isPresent()){
+        if (this.shoppingCartRepository.findById(id).isPresent()) {
             return this.shoppingCartRepository.findById(id).get();
-        }else {
+        } else {
             throw new ShoppingCartNotFoundException(id);
         }
     }
