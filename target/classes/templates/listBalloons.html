@@ -3,11 +3,14 @@
         <div class="row">
             <div class="col-12">
                 <div class="table-responsive">
-                    <form th:action="@{/form}" th:method="GET">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="fa fa-trash">Add a
-                            balloon</i>
-                        </button>
-                    </form>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <form th:action="@{/form}" th:method="GET">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block add-balloon"><i
+                                    class="fa fa-trash">Add a
+                                balloon</i>
+                            </button>
+                        </form>
+                    </th:block>
 
                     <br/>
 
@@ -39,7 +42,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="balloon : ${listBalloons}">
+                    <tr th:each="balloon : ${listBalloons}" class="balloon">
                         <form th:method="POST" th:action="@{'shopping-cart/add-product/{id}' (id=${balloon.getId()})}">
                             <td th:text="${balloon.getName()}"></td>
                             <td th:text="${balloon.getDescription()}"></td>
@@ -60,7 +63,7 @@
                             <td>
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                     <button name="balloon" th:value="${balloon.getId()}" type="submit"
-                                            class="btn btn-success btn-sm">Add to cart
+                                            class="btn btn-success btn-sm add-to-cart">Add to cart
                                     </button>
                                 </th:block>
                             </td>
@@ -71,7 +74,7 @@
                                 <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">
 
                                     <button type="submit" class="btn btn-sm btn-danger btn-sm"><i
-                                            class="fa fa-trash">Delete</i>
+                                            class="fa fa-trash delete-product">Delete</i>
                                     </button>
                                 </form>
                             </th:block>
@@ -81,7 +84,7 @@
                                 <form th:action="@{'/balloons/edit-balloon/{id}' (id=${balloon.getId()})}"
                                       th:method="GET">
                                     <button type="submit" class="btn btn-sm btn-info btn-sm"><i
-                                            class="fa fa-trash">Edit</i>
+                                            class="fa fa-trash edit-product">Edit</i>
                                     </button>
                                 </form>
                             </th:block>
