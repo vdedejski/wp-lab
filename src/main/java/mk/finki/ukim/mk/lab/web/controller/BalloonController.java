@@ -32,7 +32,6 @@ public class BalloonController {
         }
 
         List<Balloon> listBalloons = balloonService.findAll();
-        model.addAttribute("userName", request.getSession().getAttribute("username"));
         model.addAttribute("listBalloons", listBalloons);
         model.addAttribute("bodyContent", "listBalloons");
         return "master-template";
