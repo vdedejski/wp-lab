@@ -11,6 +11,7 @@ public class AbstractPage {
     static void get (WebDriver webDriver, String relativeUrl){
         String url = System.getProperty("geb.build.baseUrl", "http://localhost:9999") + relativeUrl;
         webDriver.get(url);
+        System.out.println(url);
     }
 
     public AbstractPage(WebDriver webDriver) {

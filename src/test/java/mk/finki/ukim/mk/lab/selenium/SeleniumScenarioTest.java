@@ -29,7 +29,7 @@ public class SeleniumScenarioTest {
     @Autowired
     private AuthService authService;
 
-    private HtmlUnitDriver htmlUnitDriver;
+    private HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(true);
 
     private static List<Balloon> balloonList;
 
@@ -39,6 +39,7 @@ public class SeleniumScenarioTest {
 
     private static boolean dataInitialized = false;
 
+    //TODO Crashes here!!! WHY?
     @BeforeEach
     private void setup() {
         this.htmlUnitDriver = new HtmlUnitDriver(true);
@@ -68,7 +69,7 @@ public class SeleniumScenarioTest {
         balloonsPage.assertElement(0, 0, 0, 0, 0);
 
         LoginPage loginPage = LoginPage.openLogin(this.htmlUnitDriver);
-        balloonsPage = LoginPage.doLogin(this.htmlUnitDriver, loginPage, "admin", "admin");
+        balloonsPage = LoginPage.doLogin(this.htmlUnitDriver, loginPage, "admin", "pass");
         balloonsPage.assertElement(0, 0, 0, 0, 1);
     }
 
