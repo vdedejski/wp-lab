@@ -1,11 +1,9 @@
 package mk.finki.ukim.mk.lab;
 
 import mk.finki.ukim.mk.lab.model.Balloon;
-import mk.finki.ukim.mk.lab.model.Order;
 import mk.finki.ukim.mk.lab.model.ShoppingCart;
 import mk.finki.ukim.mk.lab.model.User;
 import mk.finki.ukim.mk.lab.model.exceptions.ShoppingCartNotFoundException;
-import mk.finki.ukim.mk.lab.model.exceptions.UserNotFoundException;
 import mk.finki.ukim.mk.lab.repository.BalloonRepository;
 import mk.finki.ukim.mk.lab.repository.ShoppingCartRepository;
 import mk.finki.ukim.mk.lab.repository.UserRepository;
