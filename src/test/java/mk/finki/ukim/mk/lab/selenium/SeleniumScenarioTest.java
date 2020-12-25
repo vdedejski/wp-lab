@@ -1,12 +1,14 @@
 package mk.finki.ukim.mk.lab.selenium;
 
 import mk.finki.ukim.mk.lab.model.Balloon;
+import mk.finki.ukim.mk.lab.model.Manufacturer;
 import mk.finki.ukim.mk.lab.model.User;
 import mk.finki.ukim.mk.lab.service.AuthService;
 import mk.finki.ukim.mk.lab.service.BalloonService;
 import mk.finki.ukim.mk.lab.service.ManufacturerService;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,8 @@ public class SeleniumScenarioTest {
 
     private static List<Balloon> balloonList;
 
+    private static Manufacturer m1;
+
     private static User adminUser;
 
     private static String admin = "admin";
@@ -55,8 +59,8 @@ public class SeleniumScenarioTest {
 
     private void initData() {
         if (!dataInitialized) {
-            balloonList = new ArrayList<>();
-            balloonList.add(new Balloon("test", "testDescription"));
+            adminUser = authService.register("admin", "pass", "pass", "admin");
+            m1 = manufacturerService.save("testmanu", "testmanu", "testmanu");
 
             adminUser = authService.getUser("admin");
             dataInitialized = true;
@@ -71,6 +75,12 @@ public class SeleniumScenarioTest {
         LoginPage loginPage = LoginPage.openLogin(this.htmlUnitDriver);
         balloonsPage = LoginPage.doLogin(this.htmlUnitDriver, loginPage, "admin", "pass");
         balloonsPage.assertElement(0, 0, 0, 0, 1);
+
+        balloonsPage = AddProductPage.addProduct(this.htmlUnitDriver,
+                "test",
+                "testdesc",
+                "testmanu");
+        balloonsPage.assertElement(1,1,1,1,1);
     }
 
 }

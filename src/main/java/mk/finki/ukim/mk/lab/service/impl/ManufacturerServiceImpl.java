@@ -27,4 +27,9 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         return manufacturerRepository.findById(id);
     }
 
+    @Override
+    public Manufacturer save(String name, String address, String country) {
+        return manufacturerRepository.save(new Manufacturer(name, address, country));
+    }
+
 }

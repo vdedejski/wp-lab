@@ -21,4 +21,9 @@ public class Manufacturer {
     public Manufacturer() {
     }
 
+    public Manufacturer(String name, String country, String address) {
+        this.name = name;
+        this.country = country;
+        this.address = address;
+    }
 }
