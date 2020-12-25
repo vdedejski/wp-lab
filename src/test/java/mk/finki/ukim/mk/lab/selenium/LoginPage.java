@@ -23,7 +23,7 @@ public class LoginPage extends AbstractPage {
 
     public static BalloonsPage doLogin(WebDriver webDriver, LoginPage loginPage, String username, String password) {
         loginPage.username.sendKeys(username);
-        loginPage.password.sendKeys(username);
+        loginPage.password.sendKeys(password);
         loginPage.submit.click();
 
         System.out.println(webDriver.getCurrentUrl());
