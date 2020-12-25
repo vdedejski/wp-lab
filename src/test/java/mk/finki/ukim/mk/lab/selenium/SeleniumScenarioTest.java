@@ -43,7 +43,6 @@ public class SeleniumScenarioTest {
 
     private static boolean dataInitialized = false;
 
-    //TODO Crashes here!!! WHY?
     @BeforeEach
     private void setup() {
         this.htmlUnitDriver = new HtmlUnitDriver(true);
